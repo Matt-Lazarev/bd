@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+
+---
+#MySQL
+spring:
+  datasource:
+    password: Lazarev
+    url: jdbc:mysql://localhost:3306/build_company?serverTimezone=UTC
+    username: Matvey
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  config:
+    activate:
+      on-profile: dev
+
+  flyway:
+    baseline-on-migrate: true
+    locations: 'classpath:db/migration/{vendor}'
+
+

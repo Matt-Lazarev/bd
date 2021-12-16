@@ -1,0 +1,486 @@
+<!Doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+
+<style>
+
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand">
+            <a class="nav-link" th:href="@{/home}">Menu</a>
+        </span>
+        <div class="collapse navbar-collapse row" id="navbarNav">
+            <div class="col-auto me-auto">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/register}">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<body>
+<div class="container">
+    <div>
+        <h1 class="text-center"> Table List </h1>
+    </div>
+</div>
+
+<table class="table table-striped table-bordered mx-auto">
+    <thead class="table-dark">
+    <tr>
+        <th>
+            <div class="row justify-content-center">
+                <div class="col align-self-center">
+                    Action
+                </div>
+                <div class="col align-self-center">
+                    Table
+                </div>
+                <div class="col align-self-center">
+                    Fields
+                </div>
+                <div class="col-md-2 offset-md-1">
+                    Execute
+                </div>
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <form th:action="@{/select}" th:object="${tvo}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Select
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{table}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 offset-md-6 align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form th:action="@{/select/id}" th:object="${tvo}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Select by ID
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{table}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col align-self-center">
+                        <label> ID </label>
+                        <input type="text"
+                               placeholder="Enter id"
+                               th:field="*{id}"
+                               class="form-control">
+                    </div>
+                    <div class="col-md-2 offset-md-4 align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <form th:action="@{/order}" th:object="${objectData}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Order by
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{field1}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Order field </label>
+                        <input type="text"
+                               placeholder="Enter field to sort"
+                               th:field="*{field2}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Order </label>
+                        <select th:field="*{field3}">
+                            <option value="ASC">ASC</option>
+                            <option value="DESC">DESC</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 offset-md-2 align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form th:action="@{/like}" th:object="${objectData}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Select Like
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{field1}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Field </label>
+                        <input type="text"
+                               placeholder="Enter 'Like' field"
+                               th:field="*{field2}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Like expression </label>
+                        <input type="text"
+                               placeholder="Enter 'Like' exp"
+                               th:field="*{field3}"
+                               class="form-control">
+                    </div>
+                    <div class="col-md-2 offset-md-2 align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form th:action="@{/between}" th:object="${objectData}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Select Between
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{field1}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Field </label>
+                        <input type="text"
+                               placeholder="Enter 'Between' field"
+                               th:field="*{field2}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Between From </label>
+                        <input type="text"
+                               placeholder="Enter 'Between' from"
+                               th:field="*{field3}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Between To </label>
+                        <input type="text"
+                               placeholder="Enter 'Between' to"
+                               th:field="*{field4}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <form th:action="@{/insert}" th:object="${objectData}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Insert
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{field1}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 offset-md-6 align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <form th:action="@{/update}" th:object="${objectData}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Update
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{field1}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col align-self-center">
+                        <label> ID </label>
+                        <input type="text"
+                               placeholder="Enter id"
+                               th:field="*{field2}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Field </label>
+                        <input type="text"
+                               placeholder="Enter field to update"
+                               th:field="*{field3}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <label> New value </label>
+                        <input type="text"
+                               placeholder="Enter new value"
+                               th:field="*{field4}"
+                               class="form-control">
+                    </div>
+                    <div class="col align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <form th:action="@{/delete/id}" th:object="${tvo}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Delete by ID
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{table}">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col align-self-center">
+                        <label> ID </label>
+                        <input type="text"
+                               placeholder="Enter id"
+                               th:field="*{id}"
+                               class="form-control">
+                    </div>
+                    <div class="col-md-2 offset-md-4 align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <form th:action="@{/filter}" th:object="${objectData}" th:method="POST">
+                <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                        Filter
+                    </div>
+                    <div class="col align-self-center">
+                        <label> Table </label>
+                        <select th:field="*{field1}" class="form-select form-select-sm">
+                            <option th:each="tab : ${tables}"
+                                    th:value="${tab}"
+                                    th:text="${tab}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 offset-md-6 align-self-center">
+                        <button class="btn btn-success"
+                                type="submit"
+                                th:text="Execute">
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-4 align-self-center">
+                        <label> First field </label>
+                        <input type="text"
+                               th:field="*{field2}"
+                               class="form-control">
+                    </div>
+                    <div class="col-4 align-self-center">
+                        <label> Compare sign </label>
+                        <select th:field="*{compareSign1}" class="form-select form-select-sm">
+                            <option value=">"> > </option>
+                            <option value="="> = </option>
+                            <option value="<"> < </option>
+                            <option value=">="> >= </option>
+                            <option value="<="> <= </option>
+                            <option value="<>"> != </option>
+                        </select>
+                    </div>
+                    <div class="col-4 align-self-center">
+                        <label> First value </label>
+                        <input type="text"
+                               th:field="*{field3}"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-2 align-self-center">
+                        <label> Logical sign </label>
+                        <select th:field="*{logical12}" class="form-select form-select-sm">
+                            <option value="and"> and </option>
+                            <option value="or"> or </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-4 align-self-center">
+                        <label> Second field </label>
+                        <input type="text"
+                               th:field="*{field4}"
+                               class="form-control">
+                    </div>
+                    <div class="col-4 align-self-center">
+                        <label> Compare sign </label>
+                        <select th:field="*{compareSign2}" class="form-select form-select-sm">
+                            <option value=">"> > </option>
+                            <option value="="> = </option>
+                            <option value="<"> < </option>
+                            <option value=">="> >= </option>
+                            <option value="<="> <= </option>
+                            <option value="<>"> != </option>
+                        </select>
+                    </div>
+                    <div class="col-4 align-self-center">
+                        <label> Second value </label>
+                        <input type="text"
+                               th:field="*{field5}"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-2 align-self-center">
+                        <label> Logical sign </label>
+                        <select th:field="*{logical23}" class="form-select form-select-sm">
+                            <option value="and"> and </option>
+                            <option value="or"> or </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-4 align-self-center">
+                        <label> Third field </label>
+                        <input type="text"
+                               th:field="*{field6}"
+                               class="form-control">
+                    </div>
+                    <div class="col-4 align-self-center">
+                        <label> Compare sign </label>
+                        <select th:field="*{compareSign3}" class="form-select form-select-sm">
+                            <option value=">"> > </option>
+                            <option value="="> = </option>
+                            <option value="<"> < </option>
+                            <option value=">="> >= </option>
+                            <option value="<="> <= </option>
+                            <option value="<>"> != </option>
+                        </select>
+                    </div>
+                    <div class="col-4 align-self-center">
+                        <label> Third value </label>
+                        <input type="text"
+                               th:field="*{field7}"
+                               class="form-control">
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
